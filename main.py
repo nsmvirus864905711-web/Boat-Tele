@@ -2,7 +2,7 @@ import os
 import telebot
 from flask import Flask, redirect, abort
 
-# Aapka Token aur Channel Username set ho gaya hai
+# Aapka Token, Username aur Render Link set ho gaya hai
 API_TOKEN = '8730423832:AAF4WaDLutb1JIvo8kLBr24dgrZbfws_A-w'
 CHANNEL_USERNAME = '@NsmVid'
 
@@ -17,9 +17,8 @@ def handle_docs(message):
         forwarded = bot.forward_message(CHANNEL_USERNAME, message.chat.id, message.message_id)
         file_id = forwarded.message_id
         
-        # Render deployment ke baad aapka asli link yahan automatic connect ho jayega
-        # Abhi ke liye hum template link de rahe hain
-        web_link = f"https://tg-drive-link.onrender.com/file/{file_id}"
+        # Aapka asli Render link yahan connect ho gaya hai
+        web_link = f"https://boat-tele.onrender.com/file/{file_id}"
         
         reply_text = f"✅ **File Stored Permanently!**\n\n🚀 **Browser Download Link:**\n`{web_link}`"
         bot.reply_to(message, reply_text, parse_mode='Markdown')
@@ -53,7 +52,6 @@ def home():
     return "Telegram Permanent Drive Server is Active!"
 
 if __name__ == '__main__':
-    # Web server ko run karne ke liye (Render ke liye port zaroori hai)
     port = int(os.environ.get("PORT", 5000))
     
     # Background me bot polling shuru karna
@@ -62,4 +60,4 @@ if __name__ == '__main__':
     
     # Web app start karna
     app.run(host='0.0.0.0', port=port)
-  
+    
