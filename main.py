@@ -2,14 +2,14 @@ import os
 import telebot
 from flask import Flask, redirect, abort
 
-# Aapka Token, Username aur Render Link set ho gaya hai
+# Sahi Username @NsmVid_botz set kar diya hai
 API_TOKEN = '8730423832:AAF4WaDLutb1JIvo8kLBr24dgrZbfws_A-w'
-CHANNEL_USERNAME = '@NsmVid'
+CHANNEL_USERNAME = '@NsmVid_botz'
 
 bot = telebot.TeleBot(API_TOKEN)
 app = Flask(__name__)
 
-# Jab bot par koi file aaye, toh use @NsmVid channel me forward karna
+# Jab bot par koi file aaye, toh use @NsmVid_botz channel me forward karna
 @bot.message_handler(content_types=['video', 'audio', 'document', 'photo'])
 def handle_docs(message):
     try:
@@ -17,7 +17,7 @@ def handle_docs(message):
         forwarded = bot.forward_message(CHANNEL_USERNAME, message.chat.id, message.message_id)
         file_id = forwarded.message_id
         
-        # Aapka asli Render link yahan connect ho gaya hai
+        # Aapka asli Render link
         web_link = f"https://boat-tele.onrender.com/file/{file_id}"
         
         reply_text = f"✅ **File Stored Permanently!**\n\n🚀 **Browser Download Link:**\n`{web_link}`"
